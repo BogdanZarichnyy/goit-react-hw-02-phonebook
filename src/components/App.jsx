@@ -22,7 +22,7 @@ export class App extends Component {
         return nanoid();
     }
 
-    addName = event => {
+    handleAddName = event => {
         event.preventDefault();
 
         const { id, value: name } = event.target.elements.name;
@@ -36,11 +36,11 @@ export class App extends Component {
         this.setState(previousState => ({ contacts: [ ...previousState.contacts, { id, name, number }] }) );
     }
 
-    findName = (event) => {
+    handleFindName = (event) => {
         this.setState({ filter: event.target.value.toLowerCase()});
     }
 
-    deleteName = (id) => {
+    handleDeleteName = (id) => {
         this.setState(previousState => ({ contacts: previousState.contacts.filter(user => user.id !== id) } ));
     }
 
@@ -50,13 +50,13 @@ export class App extends Component {
 
                 <h1>Phonebook</h1>
 
-                <ContactForm addName={this.addName} nameInputId={this.nameInputId} />
+                <ContactForm addName={this.handleAddName} nameInputId={this.nameInputId} />
 
                 <h2>Contacts</h2>
 
-                <Filter findName={this.findName} />
+                <Filter findName={this.handleFindName} />
 
-                <ContactList data={this.state} deleteName={this.deleteName} />
+                <ContactList data={this.state} deleteName={this.handleDeleteName} />
 
             </div>
         )
